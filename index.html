@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
-<meta property="og:title" content="Свадьба Никиты и Зарины">
-<meta property="og:description" content="18 июля 2026">
-<meta property="og:image" content="https://ВАШ-ЛОГИН.github.io/wedding-invite/preview.jpg">
-<meta property="og:type" content="website">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Никита & Зарина — Свадебное приглашение</title>
+
+  <!-- Telegram / Open Graph preview -->
+  <meta property="og:title" content="Свадьба Никиты и Зарины" />
+  <meta property="og:description" content="18 июля 2026 • Cafe49 • ул. Ленина, 49" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://npstep1997-lab.github.io/wedding-invite/" />
+  <meta property="og:image" content="https://npstep1997-lab.github.io/wedding-invite/preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Свадьба Никиты и Зарины" />
+  <meta name="twitter:description" content="18 июля 2026 • Cafe49 • ул. Ленина, 49" />
+  <meta name="twitter:image" content="https://npstep1997-lab.github.io/wedding-invite/preview.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --champagne: #e6dcc7;
@@ -20,6 +34,8 @@
       --paper: #f5efe6;
       --paper-2: #efe7db;
       --text: #6e5a46;
+      --line: #cdbfae;
+      --soft: rgba(255,255,255,.75);
     }
 
     * {
@@ -42,9 +58,9 @@
       max-width: 430px;
       margin: 0 auto;
       background: var(--paper);
-      box-shadow: 0 18px 60px rgba(75, 42, 22, 0.18);
-      overflow: hidden;
       min-height: 100vh;
+      overflow: hidden;
+      box-shadow: 0 18px 60px rgba(75, 42, 22, 0.18);
     }
 
     .screen {
@@ -70,54 +86,194 @@
       pointer-events: none;
     }
 
-    .title, .section-title, .time, .place, .final-title, .date {
+    .title,
+    .section-title,
+    .time,
+    .place,
+    .date,
+    .calendar-month,
+    .final-title,
+    .hero-monogram {
       font-family: "Cormorant Garamond", serif;
       letter-spacing: .04em;
     }
 
-    .title {
-      font-size: 56px;
-      line-height: .95;
-      color: var(--tawny);
+    .hero-top {
       position: relative;
       z-index: 1;
-    }
-
-    .subtitle {
-      margin-top: 14px;
-      font-size: 18px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .date {
-      margin-top: 18px;
-      font-size: 48px;
-      color: var(--tawny);
-      position: relative;
-      z-index: 1;
-    }
-
-    .weekday {
-      margin-top: 8px;
       text-transform: uppercase;
-      letter-spacing: .32em;
+      letter-spacing: .22em;
       font-size: 12px;
+      color: #7b6856;
+      margin-bottom: 34px;
+    }
+
+    .hero-monogram-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
       position: relative;
       z-index: 1;
     }
 
-    .scroll-note {
-      margin-top: 26px;
-      text-transform: uppercase;
-      letter-spacing: .28em;
-      font-size: 11px;
+    .hero-monogram {
+      font-size: 92px;
+      line-height: 1;
+      color: #1f1a16;
+    }
+
+    .hero-branch {
+      width: 68px;
+      height: 120px;
+      position: relative;
+    }
+
+    .hero-branch::before,
+    .hero-branch::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      background: #2d231a;
+      transform: translateX(-50%);
+    }
+
+    .hero-branch::before {
+      top: 12px;
+      height: 96px;
+      transform: translateX(-50%) rotate(16deg);
+      transform-origin: center top;
+    }
+
+    .leaf {
+      position: absolute;
+      border: 2px solid #2d231a;
+      border-radius: 100% 0 100% 0;
+      background: transparent;
+    }
+
+    .leaf.one {
+      width: 24px;
+      height: 54px;
+      left: 6px;
+      top: 8px;
+      transform: rotate(-24deg);
+    }
+
+    .leaf.two {
+      width: 22px;
+      height: 50px;
+      right: 4px;
+      top: 44px;
+      transform: rotate(26deg);
+    }
+
+    .leaf.three {
+      width: 19px;
+      height: 40px;
+      left: 28px;
+      top: 70px;
+      transform: rotate(-8deg);
+    }
+
+    .names-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
       position: relative;
       z-index: 1;
+    }
+
+    .name-label {
+      width: 42%;
+      text-align: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px;
+      letter-spacing: .14em;
+      color: #1f1a16;
+      text-transform: uppercase;
+    }
+
+    .date-composition {
+      margin-top: 54px;
+      position: relative;
+      z-index: 1;
+      color: #1f1a16;
+    }
+
+    .date-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .date-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .date-line {
+      height: 1px;
+      flex: 1;
+      background: #7d6a57;
+      opacity: .85;
+    }
+
+    .date-side span {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 26px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .date-center {
+      padding: 0 18px;
+      border-left: 2px solid #7d6a57;
+      border-right: 2px solid #7d6a57;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .date-month {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .date-day {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 74px;
+      line-height: .9;
+      margin: 6px 0;
+    }
+
+    .date-year {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+      letter-spacing: .12em;
+    }
+
+    .hero-address {
+      margin-top: 70px;
+      position: relative;
+      z-index: 1;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #2c2219;
     }
 
     .countdown {
-      margin: 28px auto 0;
+      margin: 34px auto 0;
       width: 100%;
       max-width: 360px;
       display: grid;
@@ -149,15 +305,61 @@
       color: #8a755f;
     }
 
-    .timing {
-      background: var(--biscotti);
-      color: white;
+    .scroll-note {
+      margin-top: 22px;
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-size: 11px;
+      color: #7a6a57;
+      position: relative;
+      z-index: 1;
       text-align: center;
+    }
+
+    .message-section {
+      background: #f7f2eb;
+      text-align: center;
+    }
+
+    .message-card {
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.06);
+    }
+
+    .message-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 42px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #5f4d3d;
+    }
+
+    .message-text {
+      margin-top: 18px;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #6d5a47;
     }
 
     .section-title {
       font-size: 44px;
       margin: 0;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      margin-top: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .timing {
+      background: var(--biscotti);
+      color: white;
+      text-align: center;
     }
 
     .timeline {
@@ -192,9 +394,16 @@
       line-height: 1.5;
     }
 
+    .palette,
+    .calendar-section,
+    .wishes-section,
+    .map-section,
+    .rsvp {
+      text-align: center;
+    }
+
     .palette {
       background: var(--paper);
-      text-align: center;
     }
 
     .palette-text,
@@ -236,9 +445,115 @@
       text-align: center;
     }
 
+    .calendar-section {
+      background: #f7f2eb;
+    }
+
+    .calendar-wrap {
+      margin-top: 30px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255,255,255,.55);
+      padding: 24px 18px 20px;
+      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.06);
+    }
+
+    .calendar-heading {
+      font-family: "Cormorant Garamond", serif;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font-size: 13px;
+      color: #7d6a57;
+    }
+
+    .calendar-month {
+      margin-top: 10px;
+      font-size: 34px;
+      color: var(--tawny);
+    }
+
+    .calendar-weekdays,
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .calendar-weekdays div {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 18px;
+      color: #8c7762;
+      text-transform: uppercase;
+    }
+
+    .calendar-day {
+      position: relative;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      color: #4f4034;
+    }
+
+    .calendar-day.empty {
+      opacity: 0;
+    }
+
+    .calendar-day.marked::before {
+      content: "";
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      border: 2px solid var(--tawny);
+      border-radius: 999px;
+    }
+
+    .calendar-note {
+      margin-top: 18px;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #8b765d;
+    }
+
+    .wishes-section {
+      background: linear-gradient(180deg, #f6efe7 0%, #efe4d6 100%);
+    }
+
+    .wish-card {
+      margin-top: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .wish-item {
+      background: rgba(255,255,255,.72);
+      border: 1px solid #d9c8b1;
+      border-radius: 24px;
+      padding: 20px 18px;
+      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.07);
+    }
+
+    .wish-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px;
+      color: var(--tawny);
+      letter-spacing: .04em;
+    }
+
+    .wish-text {
+      margin-top: 10px;
+      line-height: 1.75;
+      color: #6c5846;
+      font-size: 15px;
+    }
+
     .map-section {
       background: #efe8dd;
-      text-align: center;
     }
 
     .card {
@@ -289,17 +604,18 @@
       cursor: pointer;
       font-size: 15px;
       text-align: center;
+      box-shadow: 0 10px 28px rgba(75, 42, 22, 0.18);
     }
 
     .btn.secondary {
       background: #fffaf5;
       color: var(--tawny);
       border: 1px solid #cdb79d;
+      box-shadow: none;
     }
 
     .rsvp {
       background: linear-gradient(180deg, #f5efe6 0%, #eadfce 100%);
-      text-align: center;
     }
 
     .form {
@@ -407,22 +723,62 @@
     }
 
     @media (max-width: 380px) {
-      .title { font-size: 48px; }
-      .date { font-size: 42px; }
+      .hero-monogram { font-size: 80px; }
+      .name-label { font-size: 26px; }
+      .date-day { font-size: 64px; }
+      .date-side span { font-size: 22px; }
+      .hero-address { font-size: 20px; }
       .section-title { font-size: 38px; }
       .time { font-size: 32px; }
       .countdown-number { font-size: 26px; }
       .final-title { font-size: 46px; }
+      .message-title { font-size: 36px; }
     }
   </style>
 </head>
 <body>
   <main class="site">
     <section class="screen hero animate">
-      <div class="title">Никита & Зарина</div>
-      <div class="subtitle">Приглашают вас на свадьбу</div>
-      <div class="date">18.07.2026</div>
-      <div class="weekday">Суббота</div>
+      <div class="hero-top">The Wedding Ceremony Of</div>
+
+      <div class="hero-monogram-wrap">
+        <div class="hero-monogram">Н</div>
+
+        <div class="hero-branch" aria-hidden="true">
+          <span class="leaf one"></span>
+          <span class="leaf two"></span>
+          <span class="leaf three"></span>
+        </div>
+
+        <div class="hero-monogram">З</div>
+      </div>
+
+      <div class="names-row">
+        <div class="name-label">Никита</div>
+        <div class="name-label">Зарина</div>
+      </div>
+
+      <div class="date-composition">
+        <div class="date-grid">
+          <div class="date-side">
+            <div class="date-line"></div>
+            <span>2026</span>
+          </div>
+
+          <div class="date-center">
+            <div class="date-month">Июль</div>
+            <div class="date-day">18</div>
+            <div class="date-year">2026</div>
+          </div>
+
+          <div class="date-side">
+            <span>Суббота</span>
+            <div class="date-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-address">ул. Ленина 49</div>
 
       <div class="countdown">
         <div class="countdown-item">
@@ -444,6 +800,16 @@
       </div>
 
       <div class="scroll-note">Листайте вниз</div>
+    </section>
+
+    <section class="screen message-section animate">
+      <div class="message-card">
+        <div class="message-title">Родные и любимые!</div>
+        <div class="message-text">
+          Мы рады сообщить вам, что состоится долгожданное событие — наша свадьба!<br><br>
+          Мы искренне хотим разделить наше счастье в кругу самых близких нам людей!
+        </div>
+      </div>
     </section>
 
     <section class="screen timing animate">
@@ -501,6 +867,70 @@
       </div>
     </section>
 
+    <section class="screen calendar-section animate">
+      <h2 class="section-title" style="color: var(--tawny);">Июль 2026</h2>
+      <p class="section-subtitle">Будем счастливы разделить этот день вместе с вами</p>
+
+      <div class="calendar-wrap">
+        <div class="calendar-heading">Свадебная дата</div>
+        <div class="calendar-month">Июль</div>
+
+        <div class="calendar-weekdays">
+          <div>ПН</div>
+          <div>ВТ</div>
+          <div>СР</div>
+          <div>ЧТ</div>
+          <div>ПТ</div>
+          <div>СБ</div>
+          <div>ВС</div>
+        </div>
+
+        <div class="calendar-days">
+          <div class="calendar-day empty"></div>
+          <div class="calendar-day empty"></div>
+          <div class="calendar-day">1</div>
+          <div class="calendar-day">2</div>
+          <div class="calendar-day">3</div>
+          <div class="calendar-day">4</div>
+          <div class="calendar-day">5</div>
+
+          <div class="calendar-day">6</div>
+          <div class="calendar-day">7</div>
+          <div class="calendar-day">8</div>
+          <div class="calendar-day">9</div>
+          <div class="calendar-day">10</div>
+          <div class="calendar-day">11</div>
+          <div class="calendar-day">12</div>
+
+          <div class="calendar-day">13</div>
+          <div class="calendar-day">14</div>
+          <div class="calendar-day">15</div>
+          <div class="calendar-day">16</div>
+          <div class="calendar-day">17</div>
+          <div class="calendar-day marked">18</div>
+          <div class="calendar-day">19</div>
+
+          <div class="calendar-day">20</div>
+          <div class="calendar-day">21</div>
+          <div class="calendar-day">22</div>
+          <div class="calendar-day">23</div>
+          <div class="calendar-day">24</div>
+          <div class="calendar-day">25</div>
+          <div class="calendar-day">26</div>
+
+          <div class="calendar-day">27</div>
+          <div class="calendar-day">28</div>
+          <div class="calendar-day">29</div>
+          <div class="calendar-day">30</div>
+          <div class="calendar-day">31</div>
+          <div class="calendar-day empty"></div>
+          <div class="calendar-day empty"></div>
+        </div>
+
+        <div class="calendar-note">18 июля 2026 • суббота</div>
+      </div>
+    </section>
+
     <section class="screen map-section animate">
       <h2 class="section-title" style="color: var(--tawny);">Как добраться</h2>
 
@@ -520,6 +950,31 @@
       <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2049" target="_blank" rel="noreferrer">
         Построить маршрут
       </a>
+    </section>
+
+    <section class="screen wishes-section animate">
+      <h2 class="section-title" style="color: var(--tawny);">Пожелания</h2>
+      <p class="section-subtitle">
+        Нам очень важно, чтобы этот день прошёл легко, тепло и комфортно для всех гостей
+      </p>
+
+      <div class="wish-card">
+        <div class="wish-item">
+          <div class="wish-title">Без детей</div>
+          <div class="wish-text">
+            Просим вас по возможности провести этот вечер без детей
+            и посвятить его отдыху и празднику вместе с нами.
+          </div>
+        </div>
+
+        <div class="wish-item">
+          <div class="wish-title">Без цветов</div>
+          <div class="wish-text">
+            Пожалуйста, не дарите нам цветы.
+            Ваше внимание и тёплые слова будут для нас самым важным подарком.
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="screen rsvp animate">
@@ -549,7 +1004,7 @@
 
         <div class="field">
           <label for="message">Комментарий</label>
-          <textarea id="message" name="message" placeholder="Например, будут дети / пищевые предпочтения"></textarea>
+          <textarea id="message" name="message" placeholder="Например, буду с супругом / пожелания по меню"></textarea>
         </div>
 
         <div class="buttons">
@@ -558,7 +1013,7 @@
         </div>
 
         <div class="rsvp-note" id="rsvp-note">
-          Для безопасной отправки в Telegram токен бота не встроен в открытый код сайта.
+          Для безопасной автоматической отправки в Telegram нужен серверный обработчик. Сейчас форма собирает данные и открывает готовое сообщение.
         </div>
       </form>
     </section>
@@ -650,8 +1105,4 @@
     });
   </script>
 </body>
-
 </html>
-
-
-
