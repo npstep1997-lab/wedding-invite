@@ -6,23 +6,24 @@
 
   <title>Никита & Зарина — Свадебное приглашение</title>
 
-  <!-- Telegram / Open Graph preview -->
   <meta property="og:title" content="Свадьба Никиты и Зарины" />
   <meta property="og:description" content="18 июля 2026 • Cafe49 • ул. Ленина, 49" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://npstep1997-lab.github.io/wedding-invite/" />
-  <meta property="og:image" content="https://npstep1997-lab.github.io/wedding-invite/preview.png" />
+  <meta property="og:image" content="https://npstep1997-lab.github.io/wedding-invite/preview.png?v=2" />
+  <meta property="og:image:secure_url" content="https://npstep1997-lab.github.io/wedding-invite/preview.png?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Свадьба Никиты и Зарины" />
   <meta name="twitter:description" content="18 июля 2026 • Cafe49 • ул. Ленина, 49" />
-  <meta name="twitter:image" content="https://npstep1997-lab.github.io/wedding-invite/preview.png" />
+  <meta name="twitter:image" content="https://npstep1997-lab.github.io/wedding-invite/preview.png?v=2" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -33,18 +34,13 @@
       --chocolate: #4b2a16;
       --paper: #f5efe6;
       --paper-2: #efe7db;
+      --paper-3: #f7f2eb;
       --text: #6e5a46;
       --line: #cdbfae;
-      --soft: rgba(255,255,255,.75);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -72,9 +68,26 @@
       position: relative;
     }
 
+    .time,
+    .place,
+    .calendar-month,
+    .final-title,
+    .hero-monogram,
+    .date-month,
+    .date-day,
+    .date-year,
+    .date-side span,
+    .name-label,
+    .hero-address,
+    .organizer-title {
+      font-family: "Cormorant Garamond", serif;
+      letter-spacing: .04em;
+    }
+
     .hero {
       background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
       text-align: center;
+      align-items: center;
     }
 
     .hero::before {
@@ -86,18 +99,6 @@
       pointer-events: none;
     }
 
-    .title,
-    .section-title,
-    .time,
-    .place,
-    .date,
-    .calendar-month,
-    .final-title,
-    .hero-monogram {
-      font-family: "Cormorant Garamond", serif;
-      letter-spacing: .04em;
-    }
-
     .hero-top {
       position: relative;
       z-index: 1;
@@ -106,6 +107,7 @@
       font-size: 12px;
       color: #7b6856;
       margin-bottom: 34px;
+      text-align: center;
     }
 
     .hero-monogram-wrap {
@@ -115,6 +117,7 @@
       gap: 18px;
       position: relative;
       z-index: 1;
+      width: 100%;
     }
 
     .hero-monogram {
@@ -127,21 +130,17 @@
       width: 68px;
       height: 120px;
       position: relative;
-    }
-
-    .hero-branch::before,
-    .hero-branch::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      width: 2px;
-      background: #2d231a;
-      transform: translateX(-50%);
+      flex-shrink: 0;
     }
 
     .hero-branch::before {
+      content: "";
+      position: absolute;
+      left: 50%;
       top: 12px;
+      width: 2px;
       height: 96px;
+      background: #2d231a;
       transform: translateX(-50%) rotate(16deg);
       transform-origin: center top;
     }
@@ -179,17 +178,18 @@
 
     .names-row {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      gap: 42px;
       margin-top: 8px;
       position: relative;
       z-index: 1;
+      width: 100%;
     }
 
     .name-label {
-      width: 42%;
+      width: 130px;
       text-align: center;
-      font-family: "Cormorant Garamond", serif;
       font-size: 30px;
       letter-spacing: .14em;
       color: #1f1a16;
@@ -201,14 +201,18 @@
       position: relative;
       z-index: 1;
       color: #1f1a16;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     .date-grid {
+      width: 100%;
+      max-width: 360px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
-      margin-top: 14px;
     }
 
     .date-side {
@@ -226,15 +230,14 @@
     }
 
     .date-side span {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 26px;
-      letter-spacing: .1em;
+      font-size: 24px;
+      letter-spacing: .08em;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
     .date-center {
-      padding: 0 18px;
+      padding: 0 16px;
       border-left: 2px solid #7d6a57;
       border-right: 2px solid #7d6a57;
       text-align: center;
@@ -242,34 +245,33 @@
     }
 
     .date-month {
-      font-family: "Cormorant Garamond", serif;
       font-size: 28px;
       text-transform: uppercase;
       letter-spacing: .12em;
     }
 
     .date-day {
-      font-family: "Cormorant Garamond", serif;
       font-size: 74px;
       line-height: .9;
       margin: 6px 0;
     }
 
     .date-year {
-      font-family: "Cormorant Garamond", serif;
       font-size: 24px;
       letter-spacing: .12em;
     }
 
     .hero-address {
-      margin-top: 70px;
+      margin-top: 56px;
       position: relative;
       z-index: 1;
-      font-family: "Cormorant Garamond", serif;
       font-size: 24px;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: #2c2219;
+      text-align: center;
+      width: 100%;
+      padding-left: 10px;
     }
 
     .countdown {
@@ -316,138 +318,39 @@
       text-align: center;
     }
 
-    .message-section {
-      background: #f7f2eb;
-      text-align: center;
-    }
-
-    .message-card {
-      background: rgba(255,255,255,.55);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px 22px;
-      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.06);
-    }
-
-    .message-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 42px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #5f4d3d;
-    }
-
-    .message-text {
-      margin-top: 18px;
-      font-size: 17px;
-      line-height: 1.9;
-      color: #6d5a47;
-    }
-
+    /* Изменен только шрифт заголовков остальных слайдов */
     .section-title {
-      font-size: 44px;
+      font-family: "Great Vibes", cursive;
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: .01em;
       margin: 0;
       text-align: center;
+      color: var(--tawny);
+      line-height: 1.2;
+      text-transform: none;
     }
 
     .section-subtitle {
       margin-top: 14px;
-      line-height: 1.7;
+      line-height: 1.8;
       text-align: center;
+      white-space: pre-line;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .timing {
-      background: var(--biscotti);
-      color: white;
-      text-align: center;
-    }
-
-    .timeline {
-      margin-top: 26px;
-      display: grid;
-      gap: 22px;
-    }
-
-    .timeline-item {
-      border-top: 1px solid rgba(255,255,255,.35);
-      padding-top: 22px;
-    }
-
-    .timeline-item:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .time {
-      font-size: 36px;
-    }
-
-    .event-title {
-      margin-top: 6px;
-      font-size: 18px;
-    }
-
-    .event-sub {
-      margin-top: 4px;
-      font-size: 14px;
-      opacity: .92;
-      line-height: 1.5;
-    }
-
-    .palette,
     .calendar-section,
-    .wishes-section,
+    .palette,
     .map-section,
-    .rsvp {
+    .wishes-section,
+    .rsvp,
+    .organizer-section {
       text-align: center;
     }
 
-    .palette {
-      background: var(--paper);
-    }
-
-    .palette-text,
-    .rsvp-text {
-      max-width: 310px;
-      margin: 16px auto 0;
-      line-height: 1.7;
-    }
-
-    .swatches {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      align-items: start;
-    }
-
-    .swatch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .swatch-color {
-      width: 100%;
-      min-width: 48px;
-      height: 86px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.6);
-      box-shadow: 0 8px 20px rgba(75, 42, 22, 0.06);
-    }
-
-    .swatch-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      color: #7b6a55;
-      text-align: center;
-    }
-
-    .calendar-section {
-      background: #f7f2eb;
-    }
+    .calendar-section { background: var(--paper-3); }
 
     .calendar-wrap {
       margin-top: 30px;
@@ -499,9 +402,7 @@
       color: #4f4034;
     }
 
-    .calendar-day.empty {
-      opacity: 0;
-    }
+    .calendar-day.empty { opacity: 0; }
 
     .calendar-day.marked::before {
       content: "";
@@ -520,41 +421,96 @@
       color: #8b765d;
     }
 
-    .wishes-section {
-      background: linear-gradient(180deg, #f6efe7 0%, #efe4d6 100%);
+    .timing {
+      background: var(--biscotti);
+      color: white;
+      text-align: center;
     }
 
-    .wish-card {
+    .timeline {
+      margin-top: 26px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .timeline-item {
+      border-top: 1px solid rgba(255,255,255,.35);
+      padding-top: 22px;
+    }
+
+    .timeline-item:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .time { font-size: 36px; }
+
+    .event-title {
+      margin-top: 6px;
+      font-size: 18px;
+    }
+
+    .event-sub {
+      margin-top: 4px;
+      font-size: 14px;
+      opacity: .92;
+      line-height: 1.5;
+    }
+
+    .palette { background: var(--paper); }
+
+    .palette-text,
+    .rsvp-text {
+      max-width: 310px;
+      margin: 16px auto 0;
+      line-height: 1.7;
+    }
+
+    .rsvp-text {
+      margin-top: 10px;
+    }
+
+    .rsvp-deadline {
+      max-width: 320px;
+      margin: 12px auto 0;
+      line-height: 1.7;
+      color: #7b624a;
+      font-size: 14px;
+    }
+
+    .swatches {
       margin-top: 28px;
       display: grid;
-      gap: 16px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: start;
     }
 
-    .wish-item {
-      background: rgba(255,255,255,.72);
-      border: 1px solid #d9c8b1;
-      border-radius: 24px;
-      padding: 20px 18px;
-      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.07);
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
-    .wish-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 30px;
-      color: var(--tawny);
-      letter-spacing: .04em;
+    .swatch-color {
+      width: 100%;
+      min-width: 48px;
+      height: 86px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.6);
+      box-shadow: 0 8px 20px rgba(75, 42, 22, 0.06);
     }
 
-    .wish-text {
-      margin-top: 10px;
-      line-height: 1.75;
-      color: #6c5846;
-      font-size: 15px;
+    .swatch-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: #7b6a55;
+      text-align: center;
     }
 
-    .map-section {
-      background: #efe8dd;
-    }
+    .map-section { background: #efe8dd; }
 
     .card {
       margin-top: 18px;
@@ -614,6 +570,31 @@
       box-shadow: none;
     }
 
+    .wishes-section {
+      background: linear-gradient(180deg, #f6efe7 0%, #efe4d6 100%);
+    }
+
+    .wish-card {
+      margin-top: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .wish-item {
+      background: rgba(255,255,255,.72);
+      border: 1px solid #d9c8b1;
+      border-radius: 24px;
+      padding: 20px 18px;
+      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.07);
+    }
+
+    .wish-text {
+      line-height: 1.8;
+      color: #6c5846;
+      font-size: 16px;
+      white-space: pre-line;
+    }
+
     .rsvp {
       background: linear-gradient(180deg, #f5efe6 0%, #eadfce 100%);
     }
@@ -629,9 +610,7 @@
       box-shadow: 0 14px 34px rgba(75, 42, 22, 0.08);
     }
 
-    .field {
-      margin-bottom: 14px;
-    }
+    .field { margin-bottom: 14px; }
 
     label {
       display: block;
@@ -640,7 +619,9 @@
       color: #7b624a;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       border: 1px solid #d8c8b2;
       background: #fffaf5;
@@ -652,7 +633,7 @@
     }
 
     textarea {
-      min-height: 110px;
+      min-height: 120px;
       resize: vertical;
     }
 
@@ -661,6 +642,7 @@
       font-size: 12px;
       line-height: 1.6;
       color: #7b624a;
+      text-align: center;
     }
 
     .buttons {
@@ -701,6 +683,7 @@
       color: rgba(255,255,255,.92);
       margin-top: 8px;
       font-size: 18px;
+      line-height: 1.7;
     }
 
     .final-date {
@@ -709,6 +692,31 @@
       font-size: 30px;
       font-family: "Cormorant Garamond", serif;
       letter-spacing: .03em;
+    }
+
+    .organizer-section {
+      min-height: auto;
+      padding: 34px 22px 46px;
+      background: #f4ede3;
+      border-top: 1px solid rgba(140,107,79,.14);
+    }
+
+    .organizer-title {
+      font-size: 28px;
+      color: var(--tawny);
+    }
+
+    .organizer-name {
+      margin-top: 8px;
+      font-size: 18px;
+      color: #6b5643;
+    }
+
+    .organizer-phone {
+      margin-top: 8px;
+      font-size: 18px;
+      color: #6b5643;
+      letter-spacing: .04em;
     }
 
     .animate {
@@ -724,15 +732,14 @@
 
     @media (max-width: 380px) {
       .hero-monogram { font-size: 80px; }
-      .name-label { font-size: 26px; }
+      .name-label { font-size: 26px; width: 110px; }
       .date-day { font-size: 64px; }
-      .date-side span { font-size: 22px; }
+      .date-side span { font-size: 20px; }
       .hero-address { font-size: 20px; }
-      .section-title { font-size: 38px; }
+      .section-title { font-size: 36px; }
       .time { font-size: 32px; }
       .countdown-number { font-size: 26px; }
       .final-title { font-size: 46px; }
-      .message-title { font-size: 36px; }
     }
   </style>
 </head>
@@ -802,74 +809,9 @@
       <div class="scroll-note">Листайте вниз</div>
     </section>
 
-    <section class="screen message-section animate">
-      <div class="message-card">
-        <div class="message-title">Родные и любимые!</div>
-        <div class="message-text">
-          Мы рады сообщить вам, что состоится долгожданное событие — наша свадьба!<br><br>
-          Мы искренне хотим разделить наше счастье в кругу самых близких нам людей!
-        </div>
-      </div>
-    </section>
-
-    <section class="screen timing animate">
-      <h2 class="section-title">Тайминг дня</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="time">14:00</div>
-          <div class="event-title">Церемония бракосочетания</div>
-          <div class="event-sub">ЗАГС Чкаловского района<br>ул. Титова, д.26</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="time">16:00</div>
-          <div class="event-title">Сбор гостей, фуршет</div>
-          <div class="event-sub">Банкетный зал — Cafe49<br>ул. Ленина, д.49, 4 этаж</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="time">17:00</div>
-          <div class="event-title">Начало банкета</div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="time">23:00</div>
-          <div class="event-title">Завершение торжества</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="screen palette animate">
-      <h2 class="section-title" style="color: var(--tawny);">Цветовая палитра</h2>
-      <p class="palette-text">Нам будет очень приятно, если вы поддержите цветовую гамму нашего праздника.</p>
-
-      <div class="swatches">
-        <div class="swatch">
-          <div class="swatch-color" style="background:#e6dcc7;"></div>
-          <div class="swatch-label">Champagne</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#d8d2c6;"></div>
-          <div class="swatch-label">Ivory</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#b9966d;"></div>
-          <div class="swatch-label">Biscotti</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#8c6b4f;"></div>
-          <div class="swatch-label">Tawny</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-color" style="background:#4b2a16;"></div>
-          <div class="swatch-label">Chocolate</div>
-        </div>
-      </div>
-    </section>
-
     <section class="screen calendar-section animate">
       <h2 class="section-title" style="color: var(--tawny);">Июль 2026</h2>
-      <p class="section-subtitle">Будем счастливы разделить этот день вместе с вами</p>
+      <p class="section-subtitle">Будем счастливы разделить этот особенный день вместе с вами.</p>
 
       <div class="calendar-wrap">
         <div class="calendar-heading">Свадебная дата</div>
@@ -931,6 +873,62 @@
       </div>
     </section>
 
+    <section class="screen timing animate">
+      <h2 class="section-title">Тайминг дня</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">14:00</div>
+          <div class="event-title">Церемония бракосочетания</div>
+          <div class="event-sub">ЗАГС Чкаловского района<br>ул. Титова, д.26</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">16:00</div>
+          <div class="event-title">Сбор гостей, фуршет</div>
+          <div class="event-sub">Банкетный зал — Cafe49<br>ул. Ленина, д.49, 4 этаж</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">17:00</div>
+          <div class="event-title">Начало банкета</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">23:00</div>
+          <div class="event-title">Завершение торжества</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen palette animate">
+      <h2 class="section-title" style="color: var(--tawny);">Цветовая палитра</h2>
+      <p class="palette-text">Нам будет очень приятно, если вы поддержите цветовую гамму нашего праздника.</p>
+
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#e6dcc7;"></div>
+          <div class="swatch-label">Champagne</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#d8d2c6;"></div>
+          <div class="swatch-label">Ivory</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#b9966d;"></div>
+          <div class="swatch-label">Biscotti</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#8c6b4f;"></div>
+          <div class="swatch-label">Tawny</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#4b2a16;"></div>
+          <div class="swatch-label">Chocolate</div>
+        </div>
+      </div>
+    </section>
+
     <section class="screen map-section animate">
       <h2 class="section-title" style="color: var(--tawny);">Как добраться</h2>
 
@@ -941,13 +939,12 @@
 
       <div class="map-wrap">
         <iframe
-          src="https://www.google.com/maps?q=%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2049&z=17&output=embed"
+          src="https://yandex.ru/map-widget/v1/?text=%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2049&z=17"
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Карта Cafe49"></iframe>
+          title="Яндекс Карта Cafe49"></iframe>
       </div>
 
-      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2049" target="_blank" rel="noreferrer">
+      <a class="btn" href="https://yandex.ru/maps/?rtext=~%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2049&rtt=auto" target="_blank" rel="noreferrer">
         Построить маршрут
       </a>
     </section>
@@ -960,7 +957,6 @@
 
       <div class="wish-card">
         <div class="wish-item">
-          <div class="wish-title">Без детей</div>
           <div class="wish-text">
             Просим вас по возможности провести этот вечер без детей
             и посвятить его отдыху и празднику вместе с нами.
@@ -968,18 +964,20 @@
         </div>
 
         <div class="wish-item">
-          <div class="wish-title">Без цветов</div>
-          <div class="wish-text">
-            Пожалуйста, не дарите нам цветы.
-            Ваше внимание и тёплые слова будут для нас самым важным подарком.
-          </div>
+          <div class="wish-text">Пожалуйста, не дарите нам цветы.
+Ваши пожелания в конвертах будут лучшими подарками, которые помогут исполнить наши мечты.</div>
         </div>
       </div>
     </section>
 
     <section class="screen rsvp animate">
       <h2 class="section-title" style="color: var(--tawny);">Подтверждение присутствия</h2>
-      <p class="rsvp-text">Пожалуйста, сообщите нам заранее, сможете ли вы присутствовать на нашем празднике.</p>
+      <p class="rsvp-text">
+        Пожалуйста, сообщите нам заранее, сможете ли вы присутствовать на нашем празднике.
+      </p>
+      <p class="rsvp-deadline">
+        Просим подтвердить ваше присутствие до 1 июня 2026 любым удобным для вас способом.
+      </p>
 
       <form class="form" id="rsvp-form">
         <div class="field">
@@ -1004,7 +1002,7 @@
 
         <div class="field">
           <label for="message">Комментарий</label>
-          <textarea id="message" name="message" placeholder="Например, буду с супругом / пожелания по меню"></textarea>
+          <textarea id="message" name="message" placeholder="Например, буду с супругом / пожелания по меню и напиткам"></textarea>
         </div>
 
         <div class="buttons">
@@ -1013,7 +1011,7 @@
         </div>
 
         <div class="rsvp-note" id="rsvp-note">
-          Для безопасной автоматической отправки в Telegram нужен серверный обработчик. Сейчас форма собирает данные и открывает готовое сообщение.
+          Форма подготовит сообщение для отправки в Telegram.
         </div>
       </form>
     </section>
@@ -1024,6 +1022,12 @@
         <div class="final-sub">С любовью ждём вас</div>
         <div class="final-date">18 июля 2026</div>
       </div>
+    </section>
+
+    <section class="organizer-section animate">
+      <div class="organizer-title">Организатор</div>
+      <div class="organizer-name">Олеся</div>
+      <div class="organizer-phone">8 922 212 00 22</div>
     </section>
   </main>
 
@@ -1065,7 +1069,7 @@
           entry.target.classList.remove("hidden");
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
     animatedBlocks.forEach((el, index) => {
       if (index === 0) {
@@ -1095,12 +1099,13 @@
 
     form.addEventListener("submit", function(e) {
       e.preventDefault();
-      note.textContent = "Форма заполнена. Для автоматической отправки в Telegram нужен безопасный серверный обработчик.";
+      const url = "https://t.me/share/url?url=&text=" + buildMessage();
+      window.open(url, "_blank");
+      note.textContent = "Сообщение подготовлено для отправки в Telegram.";
     });
 
     tgButton.addEventListener("click", function() {
-      const message = buildMessage();
-      const url = "https://t.me/share/url?url=&text=" + message;
+      const url = "https://t.me/share/url?url=&text=" + buildMessage();
       window.open(url, "_blank");
     });
   </script>
