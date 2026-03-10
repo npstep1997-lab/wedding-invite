@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Никита & Зарина — Свадебное приглашение</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --champagne: #e6dcc7;
+      --ivory: #d8d2c6;
+      --biscotti: #b9966d;
+      --tawny: #8c6b4f;
+      --chocolate: #4b2a16;
+      --paper: #f5efe6;
+      --paper-2: #efe7db;
+      --text: #6e5a46;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #e8e1d6;
+      color: var(--text);
+      font-family: "Manrope", sans-serif;
+    }
+
+    .site {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 18px 60px rgba(75, 42, 22, 0.18);
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .screen {
+      min-height: 100vh;
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(140,107,79,.12) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+
+    .title, .section-title, .time, .place, .final-title, .date {
+      font-family: "Cormorant Garamond", serif;
+      letter-spacing: .04em;
+    }
+
+    .title {
+      font-size: 56px;
+      line-height: .95;
+      color: var(--tawny);
+      position: relative;
+      z-index: 1;
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .date {
+      margin-top: 18px;
+      font-size: 48px;
+      color: var(--tawny);
+      position: relative;
+      z-index: 1;
+    }
+
+    .weekday {
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: .32em;
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scroll-note {
+      margin-top: 26px;
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-size: 11px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown {
+      margin: 28px auto 0;
+      width: 100%;
+      max-width: 360px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown-item {
+      border: 1px solid #d5c5af;
+      background: rgba(255,255,255,.72);
+      border-radius: 22px;
+      padding: 14px 8px;
+      text-align: center;
+    }
+
+    .countdown-number {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px;
+      color: var(--tawny);
+    }
+
+    .countdown-label {
+      margin-top: 4px;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #8a755f;
+    }
+
+    .timing {
+      background: var(--biscotti);
+      color: white;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 44px;
+      margin: 0;
+    }
+
+    .timeline {
+      margin-top: 26px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .timeline-item {
+      border-top: 1px solid rgba(255,255,255,.35);
+      padding-top: 22px;
+    }
+
+    .timeline-item:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .time {
+      font-size: 36px;
+    }
+
+    .event-title {
+      margin-top: 6px;
+      font-size: 18px;
+    }
+
+    .event-sub {
+      margin-top: 4px;
+      font-size: 14px;
+      opacity: .92;
+      line-height: 1.5;
+    }
+
+    .palette {
+      background: var(--paper);
+      text-align: center;
+    }
+
+    .palette-text,
+    .rsvp-text {
+      max-width: 310px;
+      margin: 16px auto 0;
+      line-height: 1.7;
+    }
+
+    .swatches {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: start;
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch-color {
+      width: 100%;
+      min-width: 48px;
+      height: 86px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.6);
+      box-shadow: 0 8px 20px rgba(75, 42, 22, 0.06);
+    }
+
+    .swatch-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: #7b6a55;
+      text-align: center;
+    }
+
+    .map-section {
+      background: #efe8dd;
+      text-align: center;
+    }
+
+    .card {
+      margin-top: 18px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid #d9c8b1;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(75, 42, 22, 0.08);
+    }
+
+    .place {
+      font-size: 32px;
+      color: var(--tawny);
+    }
+
+    .address {
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    .map-wrap {
+      margin-top: 22px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid #d9c8b1;
+      box-shadow: 0 14px 36px rgba(75, 42, 22, 0.12);
+      background: white;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 320px;
+      border: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 22px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 15px 24px;
+      background: var(--tawny);
+      color: white;
+      font-weight: 600;
+      border: 0;
+      cursor: pointer;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .btn.secondary {
+      background: #fffaf5;
+      color: var(--tawny);
+      border: 1px solid #cdb79d;
+    }
+
+    .rsvp {
+      background: linear-gradient(180deg, #f5efe6 0%, #eadfce 100%);
+      text-align: center;
+    }
+
+    .form {
+      margin: 24px auto 0;
+      max-width: 360px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid #d9c8b1;
+      border-radius: 28px;
+      padding: 18px;
+      text-align: left;
+      box-shadow: 0 14px 34px rgba(75, 42, 22, 0.08);
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #7b624a;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #d8c8b2;
+      background: #fffaf5;
+      border-radius: 18px;
+      padding: 13px 14px;
+      font: inherit;
+      color: #5d4837;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .rsvp-note {
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #7b624a;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .final-photo {
+      background-image:
+        linear-gradient(180deg, rgba(20,10,6,.10) 0%, rgba(20,10,6,.54) 100%),
+        url("./photo.jpg");
+      background-size: cover;
+      background-position: center center;
+      text-align: center;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 70px;
+    }
+
+    .overlay-card {
+      background: rgba(58, 36, 24, .45);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 28px;
+      padding: 20px;
+      backdrop-filter: blur(7px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.18);
+    }
+
+    .final-title {
+      color: white;
+      font-size: 52px;
+      line-height: .95;
+    }
+
+    .final-sub {
+      color: rgba(255,255,255,.92);
+      margin-top: 8px;
+      font-size: 18px;
+    }
+
+    .final-date {
+      color: white;
+      margin-top: 12px;
+      font-size: 30px;
+      font-family: "Cormorant Garamond", serif;
+      letter-spacing: .03em;
+    }
+
+    .animate {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .animate.hidden {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @media (max-width: 380px) {
+      .title { font-size: 48px; }
+      .date { font-size: 42px; }
+      .section-title { font-size: 38px; }
+      .time { font-size: 32px; }
+      .countdown-number { font-size: 26px; }
+      .final-title { font-size: 46px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <section class="screen hero animate">
+      <div class="title">Никита & Зарина</div>
+      <div class="subtitle">Приглашают вас на свадьбу</div>
+      <div class="date">18.07.2026</div>
+      <div class="weekday">Суббота</div>
+
+      <div class="countdown">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">00</div>
+          <div class="countdown-label">дней</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">00</div>
+          <div class="countdown-label">часов</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="minutes">00</div>
+          <div class="countdown-label">минут</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="seconds">00</div>
+          <div class="countdown-label">секунд</div>
+        </div>
+      </div>
+
+      <div class="scroll-note">Листайте вниз</div>
+    </section>
+
+    <section class="screen timing animate">
+      <h2 class="section-title">Тайминг дня</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">14:00</div>
+          <div class="event-title">Церемония бракосочетания</div>
+          <div class="event-sub">ЗАГС Чкаловского района<br>ул. Титова, д.26</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">16:00</div>
+          <div class="event-title">Сбор гостей, фуршет</div>
+          <div class="event-sub">Банкетный зал — Cafe49<br>ул. Ленина, д.49, 4 этаж</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">17:00</div>
+          <div class="event-title">Начало банкета</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="time">23:00</div>
+          <div class="event-title">Завершение торжества</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen palette animate">
+      <h2 class="section-title" style="color: var(--tawny);">Цветовая палитра</h2>
+      <p class="palette-text">Нам будет очень приятно, если вы поддержите цветовую гамму нашего праздника.</p>
+
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#e6dcc7;"></div>
+          <div class="swatch-label">Champagne</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#d8d2c6;"></div>
+          <div class="swatch-label">Ivory</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#b9966d;"></div>
+          <div class="swatch-label">Biscotti</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#8c6b4f;"></div>
+          <div class="swatch-label">Tawny</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#4b2a16;"></div>
+          <div class="swatch-label">Chocolate</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen map-section animate">
+      <h2 class="section-title" style="color: var(--tawny);">Как добраться</h2>
+
+      <div class="card">
+        <div class="place">Cafe49</div>
+        <div class="address">ул. Ленина, д.49, 4 этаж</div>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2049&z=17&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Карта Cafe49"></iframe>
+      </div>
+
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2049" target="_blank" rel="noreferrer">
+        Построить маршрут
+      </a>
+    </section>
+
+    <section class="screen rsvp animate">
+      <h2 class="section-title" style="color: var(--tawny);">Подтверждение присутствия</h2>
+      <p class="rsvp-text">Пожалуйста, сообщите нам заранее, сможете ли вы присутствовать на нашем празднике.</p>
+
+      <form class="form" id="rsvp-form">
+        <div class="field">
+          <label for="name">Ваше имя</label>
+          <input id="name" name="name" placeholder="Например, Анна" required>
+        </div>
+
+        <div class="field">
+          <label for="guests">Количество гостей</label>
+          <select id="guests" name="guests">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="contact">Телефон или Telegram</label>
+          <input id="contact" name="contact" placeholder="@username или +7..." required>
+        </div>
+
+        <div class="field">
+          <label for="message">Комментарий</label>
+          <textarea id="message" name="message" placeholder="Например, будут дети / пищевые предпочтения"></textarea>
+        </div>
+
+        <div class="buttons">
+          <button class="btn" type="submit">Подтвердить присутствие</button>
+          <button class="btn secondary" type="button" id="telegram-btn">Открыть Telegram</button>
+        </div>
+
+        <div class="rsvp-note" id="rsvp-note">
+          Для безопасной отправки в Telegram токен бота не встроен в открытый код сайта.
+        </div>
+      </form>
+    </section>
+
+    <section class="screen final-photo animate">
+      <div class="overlay-card">
+        <div class="final-title">Никита & Зарина</div>
+        <div class="final-sub">С любовью ждём вас</div>
+        <div class="final-date">18 июля 2026</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const targetDate = new Date("2026-07-18T14:00:00+05:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const animatedBlocks = document.querySelectorAll(".animate");
+    animatedBlocks.forEach(el => el.classList.add("hidden"));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("hidden");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animatedBlocks.forEach((el, index) => {
+      if (index === 0) {
+        el.classList.remove("hidden");
+      }
+      observer.observe(el);
+    });
+
+    const form = document.getElementById("rsvp-form");
+    const note = document.getElementById("rsvp-note");
+    const tgButton = document.getElementById("telegram-btn");
+
+    function buildMessage() {
+      const name = document.getElementById("name").value || "-";
+      const guests = document.getElementById("guests").value || "-";
+      const contact = document.getElementById("contact").value || "-";
+      const message = document.getElementById("message").value || "-";
+
+      return encodeURIComponent(
+        "RSVP свадьба Никиты и Зарины\n" +
+        "Имя: " + name + "\n" +
+        "Количество гостей: " + guests + "\n" +
+        "Контакт: " + contact + "\n" +
+        "Комментарий: " + message
+      );
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      note.textContent = "Форма заполнена. Для автоматической отправки в Telegram нужен безопасный серверный обработчик.";
+    });
+
+    tgButton.addEventListener("click", function() {
+      const message = buildMessage();
+      const url = "https://t.me/share/url?url=&text=" + message;
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
