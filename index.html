@@ -37,10 +37,15 @@
       --paper-3: #f7f2eb;
       --text: #6e5a46;
       --line: #cdbfae;
+      --success: #8fbc8f;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      height: 100%;
+    }
 
     body {
       margin: 0;
@@ -48,6 +53,8 @@
       color: var(--text);
       font-family: "Manrope", sans-serif;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     .site {
@@ -60,6 +67,7 @@
       box-shadow: 0 18px 60px rgba(75, 42, 22, 0.18);
       position: relative;
       z-index: 1;
+      scroll-snap-type: y proximity;
     }
 
     .screen {
@@ -69,6 +77,8 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
+      scroll-snap-align: start;
+      scroll-snap-stop: normal;
     }
 
     .time,
@@ -335,6 +345,7 @@
       position: relative;
       z-index: 1;
       text-align: center;
+      animation: scrollPulse 2.8s ease-in-out infinite;
     }
 
     .section-title {
@@ -377,6 +388,12 @@
       background: rgba(255,255,255,.55);
       padding: 24px 18px 20px;
       box-shadow: 0 10px 30px rgba(75, 42, 22, 0.06);
+      transition: transform .45s ease, box-shadow .45s ease;
+    }
+
+    .calendar-wrap:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(75, 42, 22, 0.10);
     }
 
     .calendar-heading {
@@ -455,6 +472,11 @@
     .timeline-item {
       border-top: 1px solid rgba(255,255,255,.35);
       padding-top: 22px;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-2px);
     }
 
     .timeline-item:first-child {
@@ -544,6 +566,12 @@
       border-radius: 24px;
       padding: 18px;
       box-shadow: 0 10px 30px rgba(75, 42, 22, 0.08);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(75, 42, 22, 0.12);
     }
 
     .place {
@@ -592,7 +620,8 @@
       font-size: 15px;
       text-align: center;
       box-shadow: 0 10px 28px rgba(75, 42, 22, 0.18);
-      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease, filter .22s ease;
+      will-change: transform;
     }
 
     .btn:hover {
@@ -600,8 +629,10 @@
       box-shadow: 0 14px 32px rgba(75, 42, 22, 0.24);
     }
 
-    .btn:active {
+    .btn:active,
+    .btn.pressed {
       transform: scale(.97);
+      filter: brightness(.98);
     }
 
     .btn.secondary {
@@ -655,6 +686,20 @@
       padding: 18px;
       text-align: left;
       box-shadow: 0 14px 34px rgba(75, 42, 22, 0.08);
+      transition: transform .35s ease, box-shadow .35s ease, opacity .35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form.submitting {
+      transform: scale(.985);
+      box-shadow: 0 18px 40px rgba(75, 42, 22, 0.14);
+    }
+
+    .form.success {
+      animation: successPop .65s ease;
+      box-shadow: 0 18px 42px rgba(143,188,143,.25);
+      border-color: rgba(143,188,143,.45);
     }
 
     .field { margin-bottom: 14px; }
@@ -677,7 +722,7 @@
       font: inherit;
       color: #5d4837;
       outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background .2s ease;
     }
 
     input:focus,
@@ -699,7 +744,18 @@
       line-height: 1.6;
       color: #7b624a;
       text-align: center;
-      transition: all .3s ease;
+      transition: all .35s ease;
+      min-height: 20px;
+    }
+
+    .rsvp-note.sending {
+      color: #8c6b4f;
+      animation: pulseText 1.1s ease-in-out infinite;
+    }
+
+    .rsvp-note.success-text {
+      color: #5c8a5c;
+      transform: scale(1.03);
     }
 
     .buttons {
@@ -729,6 +785,11 @@
       padding: 20px;
       backdrop-filter: blur(7px);
       box-shadow: 0 16px 40px rgba(0,0,0,.18);
+      transition: transform .45s ease;
+    }
+
+    .overlay-card:hover {
+      transform: translateY(-3px);
     }
 
     .final-title {
@@ -780,7 +841,7 @@
     .animate {
       opacity: 0;
       transform: translateY(34px);
-      transition: opacity .9s ease, transform .9s ease;
+      transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
     }
 
     .animate.show {
@@ -865,6 +926,25 @@
         transform: translate3d(20px, 110vh, 0) rotate(300deg);
         opacity: 0;
       }
+    }
+
+    @keyframes successPop {
+      0% { transform: scale(.985); }
+      35% { transform: scale(1.015); }
+      60% { transform: scale(.995); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pulseText {
+      0% { opacity: .7; }
+      50% { opacity: 1; }
+      100% { opacity: .7; }
+    }
+
+    @keyframes scrollPulse {
+      0% { transform: translateY(0); opacity: .75; }
+      50% { transform: translateY(4px); opacity: 1; }
+      100% { transform: translateY(0); opacity: .75; }
     }
 
     @media (max-width: 380px) {
@@ -1166,7 +1246,7 @@
         </div>
 
         <div class="buttons">
-          <button class="btn" type="submit">Подтвердить присутствие</button>
+          <button class="btn" id="submit-btn" type="submit">Подтвердить присутствие</button>
         </div>
 
         <div class="rsvp-note" id="rsvp-note">
@@ -1227,7 +1307,7 @@
           entry.target.classList.add("show");
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
 
     animatedBlocks.forEach((el, index) => {
       if (index === 0) {
@@ -1240,10 +1320,18 @@
 
     const form = document.getElementById("rsvp-form");
     const note = document.getElementById("rsvp-note");
+    const submitBtn = document.getElementById("submit-btn");
 
     form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
+      form.classList.remove("success");
+      form.classList.add("submitting");
+      note.classList.remove("success-text");
+      note.classList.add("sending");
+      submitBtn.classList.add("pressed");
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = "0.8";
       note.textContent = "Отправляем ваш ответ...";
 
       const payload = {
@@ -1265,13 +1353,31 @@
 
         const result = await response.json();
 
+        form.classList.remove("submitting");
+        note.classList.remove("sending");
+        submitBtn.classList.remove("pressed");
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+
         if (result.result === "success") {
+          form.classList.add("success");
+          note.classList.add("success-text");
           note.textContent = "Спасибо! Мы получили ваш ответ ❤️";
           form.reset();
+
+          setTimeout(() => {
+            form.classList.remove("success");
+          }, 900);
         } else {
+          note.classList.remove("success-text");
           note.textContent = "Ошибка: " + (result.message || "не удалось отправить форму.");
         }
       } catch (error) {
+        form.classList.remove("submitting");
+        note.classList.remove("sending", "success-text");
+        submitBtn.classList.remove("pressed");
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
         note.textContent = "Не удалось отправить форму. Попробуйте ещё раз.";
         console.error(error);
       }
