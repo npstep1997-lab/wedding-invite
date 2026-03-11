@@ -47,6 +47,7 @@
       background: #e8e1d6;
       color: var(--text);
       font-family: "Manrope", sans-serif;
+      overflow-x: hidden;
     }
 
     .site {
@@ -57,6 +58,8 @@
       min-height: 100vh;
       overflow: hidden;
       box-shadow: 0 18px 60px rgba(75, 42, 22, 0.18);
+      position: relative;
+      z-index: 1;
     }
 
     .screen {
@@ -124,13 +127,19 @@
       font-size: 92px;
       line-height: 1;
       color: #1f1a16;
+      animation: monogramFloat 5s ease-in-out infinite;
     }
+
+    .hero-monogram:nth-child(1) { animation-delay: 0s; }
+    .hero-monogram:nth-child(3) { animation-delay: .4s; }
 
     .hero-branch {
       width: 68px;
       height: 120px;
       position: relative;
       flex-shrink: 0;
+      animation: branchMove 6s ease-in-out infinite;
+      transform-origin: center top;
     }
 
     .hero-branch::before {
@@ -254,6 +263,8 @@
       font-size: 74px;
       line-height: .9;
       margin: 6px 0;
+      animation: pulseDate 3.2s ease-in-out infinite;
+      transform-origin: center;
     }
 
     .date-year {
@@ -291,7 +302,15 @@
       border-radius: 22px;
       padding: 14px 8px;
       text-align: center;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: countdownIn .8s ease forwards;
     }
+
+    .countdown-item:nth-child(1) { animation-delay: .1s; }
+    .countdown-item:nth-child(2) { animation-delay: .25s; }
+    .countdown-item:nth-child(3) { animation-delay: .4s; }
+    .countdown-item:nth-child(4) { animation-delay: .55s; }
 
     .countdown-number {
       font-family: "Cormorant Garamond", serif;
@@ -410,6 +429,7 @@
       height: 42px;
       border: 2px solid var(--tawny);
       border-radius: 999px;
+      animation: ringPulse 2.5s ease-in-out infinite;
     }
 
     .calendar-note {
@@ -499,6 +519,12 @@
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.6);
       box-shadow: 0 8px 20px rgba(75, 42, 22, 0.06);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .swatch:hover .swatch-color {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 24px rgba(75, 42, 22, 0.12);
     }
 
     .swatch-label {
@@ -537,6 +563,12 @@
       border: 1px solid #d9c8b1;
       box-shadow: 0 14px 36px rgba(75, 42, 22, 0.12);
       background: white;
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .map-wrap:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(75, 42, 22, 0.16);
     }
 
     iframe {
@@ -560,6 +592,16 @@
       font-size: 15px;
       text-align: center;
       box-shadow: 0 10px 28px rgba(75, 42, 22, 0.18);
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(75, 42, 22, 0.24);
+    }
+
+    .btn:active {
+      transform: scale(.97);
     }
 
     .btn.secondary {
@@ -585,6 +627,12 @@
       border-radius: 24px;
       padding: 20px 18px;
       box-shadow: 0 10px 30px rgba(75, 42, 22, 0.07);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .wish-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(75, 42, 22, 0.10);
     }
 
     .wish-text {
@@ -629,6 +677,15 @@
       font: inherit;
       color: #5d4837;
       outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #b9966d;
+      box-shadow: 0 0 0 4px rgba(185,150,109,.15);
+      transform: translateY(-1px);
     }
 
     textarea {
@@ -642,6 +699,7 @@
       line-height: 1.6;
       color: #7b624a;
       text-align: center;
+      transition: all .3s ease;
     }
 
     .buttons {
@@ -661,6 +719,7 @@
       align-items: center;
       justify-content: flex-end;
       padding-bottom: 70px;
+      animation: zoomSlow 18s ease-in-out infinite alternate;
     }
 
     .overlay-card {
@@ -719,14 +778,93 @@
     }
 
     .animate {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity .8s ease, transform .8s ease;
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity .9s ease, transform .9s ease;
     }
 
-    .animate.hidden {
-      opacity: 0;
-      transform: translateY(30px);
+    .animate.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .petals {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .petal {
+      position: absolute;
+      top: -10vh;
+      width: 12px;
+      height: 18px;
+      background: rgba(255, 236, 228, .75);
+      border-radius: 70% 0 70% 0;
+      opacity: .8;
+      animation: falling linear infinite;
+      filter: blur(.2px);
+    }
+
+    .petal:nth-child(1) { left: 5%; animation-duration: 13s; animation-delay: 0s; }
+    .petal:nth-child(2) { left: 14%; animation-duration: 11s; animation-delay: 2s; }
+    .petal:nth-child(3) { left: 22%; animation-duration: 15s; animation-delay: 4s; }
+    .petal:nth-child(4) { left: 31%; animation-duration: 12s; animation-delay: 1s; }
+    .petal:nth-child(5) { left: 42%; animation-duration: 16s; animation-delay: 3s; }
+    .petal:nth-child(6) { left: 54%; animation-duration: 12.5s; animation-delay: 5s; }
+    .petal:nth-child(7) { left: 66%; animation-duration: 14s; animation-delay: 2.5s; }
+    .petal:nth-child(8) { left: 77%; animation-duration: 11.5s; animation-delay: 6s; }
+    .petal:nth-child(9) { left: 88%; animation-duration: 15s; animation-delay: 1.5s; }
+    .petal:nth-child(10) { left: 95%; animation-duration: 13.5s; animation-delay: 4.5s; }
+
+    @keyframes branchMove {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(2deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    @keyframes monogramFloat {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes pulseDate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes ringPulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: .75; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes countdownIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomSlow {
+      from { background-size: 100%; }
+      to { background-size: 110%; }
+    }
+
+    @keyframes falling {
+      0% {
+        transform: translate3d(0, -10vh, 0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: .8;
+      }
+      100% {
+        transform: translate3d(20px, 110vh, 0) rotate(300deg);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 380px) {
@@ -743,6 +881,19 @@
   </style>
 </head>
 <body>
+  <div class="petals" aria-hidden="true">
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+  </div>
+
   <main class="site">
     <section class="screen hero animate">
       <div class="hero-top">The Wedding Ceremony Of</div>
@@ -937,17 +1088,13 @@
       </div>
 
       <div class="map-wrap">
-  <iframe
-    src="https://yandex.ru/map-widget/v1/?ll=60.613860,56.839878&z=17&pt=60.613860,56.839878,pm2rdm"
-    loading="lazy"
-    title="Cafe49 карта">
-  </iframe>
-</div>
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=60.613860,56.839878&z=17&pt=60.613860,56.839878,pm2rdm"
+          loading="lazy"
+          title="Яндекс Карта Cafe49"></iframe>
+      </div>
 
-     <a class="btn" 
-href="https://yandex.ru/maps/?rtext=~56.839878,60.613860&rtt=auto" 
-target="_blank" 
-rel="noopener">
+      <a class="btn" href="https://yandex.ru/maps/?rtext=~56.839878,60.613860&rtt=auto" target="_blank" rel="noopener">
         Построить маршрут
       </a>
     </section>
@@ -1036,7 +1183,7 @@ rel="noopener">
       </div>
     </section>
 
-    <section class="organizer-section animate">
+    <section class="organizer-section animate show">
       <div class="organizer-title">Организатор</div>
       <div class="organizer-name">Олеся</div>
       <div class="organizer-phone">8 922 212 00 22</div>
@@ -1073,19 +1220,18 @@ rel="noopener">
     setInterval(updateCountdown, 1000);
 
     const animatedBlocks = document.querySelectorAll(".animate");
-    animatedBlocks.forEach(el => el.classList.add("hidden"));
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.remove("hidden");
+          entry.target.classList.add("show");
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.15 });
 
     animatedBlocks.forEach((el, index) => {
       if (index === 0) {
-        el.classList.remove("hidden");
+        el.classList.add("show");
       }
       observer.observe(el);
     });
@@ -1133,5 +1279,3 @@ rel="noopener">
   </script>
 </body>
 </html>
-
-
