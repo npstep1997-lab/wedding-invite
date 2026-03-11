@@ -318,7 +318,6 @@
       text-align: center;
     }
 
-    /* Изменен только шрифт заголовков остальных слайдов */
     .section-title {
       font-family: "Great Vibes", cursive;
       font-size: 42px;
@@ -986,6 +985,16 @@
         </div>
 
         <div class="field">
+          <label for="attendance">Вы сможете присутствовать?</label>
+          <select id="attendance" name="attendance" required>
+            <option value="">Выберите вариант</option>
+            <option value="Буду">Буду</option>
+            <option value="Не смогу">Не смогу</option>
+            <option value="Уточню позже">Уточню позже</option>
+          </select>
+        </div>
+
+        <div class="field">
           <label for="guests">Количество гостей</label>
           <select id="guests" name="guests">
             <option value="1">1</option>
@@ -1007,11 +1016,10 @@
 
         <div class="buttons">
           <button class="btn" type="submit">Подтвердить присутствие</button>
-          <button class="btn secondary" type="button" id="telegram-btn">Открыть Telegram</button>
         </div>
 
         <div class="rsvp-note" id="rsvp-note">
-          Форма подготовит сообщение для отправки в Telegram.
+          Мы бережно сохраним ваш ответ.
         </div>
       </form>
     </section>
@@ -1078,35 +1086,45 @@
       observer.observe(el);
     });
 
+    const scriptURL = "https://script.google.com/macros/s/AKfycby3GHlhNLaPaZKMLLw9W3Znw7nQQboCrrbLw998E6dPeA-TM_n9lf2MGj7dy-m4MqGlCw/exec";
+
     const form = document.getElementById("rsvp-form");
     const note = document.getElementById("rsvp-note");
-    const tgButton = document.getElementById("telegram-btn");
 
-    function buildMessage() {
-      const name = document.getElementById("name").value || "-";
-      const guests = document.getElementById("guests").value || "-";
-      const contact = document.getElementById("contact").value || "-";
-      const message = document.getElementById("message").value || "-";
-
-      return encodeURIComponent(
-        "RSVP свадьба Никиты и Зарины\n" +
-        "Имя: " + name + "\n" +
-        "Количество гостей: " + guests + "\n" +
-        "Контакт: " + contact + "\n" +
-        "Комментарий: " + message
-      );
-    }
-
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
-      const url = "https://t.me/share/url?url=&text=" + buildMessage();
-      window.open(url, "_blank");
-      note.textContent = "Сообщение подготовлено для отправки в Telegram.";
-    });
 
-    tgButton.addEventListener("click", function() {
-      const url = "https://t.me/share/url?url=&text=" + buildMessage();
-      window.open(url, "_blank");
+      note.textContent = "Отправляем ваш ответ...";
+
+      const payload = {
+        name: document.getElementById("name").value.trim(),
+        attendance: document.getElementById("attendance").value,
+        guests: document.getElementById("guests").value,
+        contact: document.getElementById("contact").value.trim(),
+        comment: document.getElementById("message").value.trim()
+      };
+
+      try {
+        const response = await fetch(scriptURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.result === "success") {
+          note.textContent = "Спасибо! Мы получили ваш ответ ❤️";
+          form.reset();
+        } else {
+          note.textContent = "Ошибка: " + (result.message || "не удалось отправить форму.");
+        }
+      } catch (error) {
+        note.textContent = "Не удалось отправить форму. Попробуйте ещё раз.";
+        console.error(error);
+      }
     });
   </script>
 </body>
